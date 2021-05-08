@@ -1,0 +1,32 @@
+plugins {
+    id 'java'
+}
+
+group 'org.wzq'
+version '1.0.0'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation files(['lib/leetcode-helper.jar'])
+}
+
+
+import jdk.nashorn.api.scripting.URLReader
+
+task generate {
+    Properties problemProperties = new Properties()
+    Properties layoutProperties = new Properties()
+
+    String jar = "leetcode-helper.jar"
+    layoutProperties.load(new URLReader(new URL("jar:file:lib/${jar}!/conf/layout.properties"), "utf-8"))
+    problemProperties.load(new FileInputStream("problem.properties"))
+
+    println problemProperties.getProperty("problem.name")
+//    def config = new ConfigSlurper().parse(properties)
+//
+//
+//    println(config.problem.name)
+}
