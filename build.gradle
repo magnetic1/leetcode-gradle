@@ -30,3 +30,11 @@ task generate {
 //
 //    println(config.problem.name)
 }
+
+import org.wzq.leetcode.Fun
+
+task hello {
+    doLast {
+        Fun.sayHello()
+    }
+}
