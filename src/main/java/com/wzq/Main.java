@@ -1,6 +1,7 @@
 package com.wzq;
 
-import com.ciaoshen.leetcode.util.TreeNode;
+
+import com.wzq.leetcode.util.TreeNode;
 
 public class Main {
     public static void main(String[] args) {

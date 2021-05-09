@@ -12,7 +12,7 @@ repositories {
 }
 
 dependencies {
-    implementation files(['lib/leetcode-helper.jar'])
+    implementation project(':LeetcodeUtils')
 }
 
 
