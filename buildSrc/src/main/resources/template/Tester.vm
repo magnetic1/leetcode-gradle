@@ -1,4 +1,4 @@
-/**
+/*
  * Leetcode - ${problem}
  */
 package ${pck}.${problem};

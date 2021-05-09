@@ -34,7 +34,7 @@ task generate {
     Properties layoutProperties = new Properties()
 
     String jar = "leetcode-helper.jar"
-    layoutProperties.load(new URLReader(new URL("jar:file:lib/${jar}!/conf/layout.properties"), "utf-8"))
+//    layoutProperties.load(new URLReader(new URL("jar:file:lib/${jar}!/conf/layout.properties"), "utf-8"))
     problemProperties.load(new FileInputStream("problem.properties"))
 
     println problemProperties.getProperty("problem.name")

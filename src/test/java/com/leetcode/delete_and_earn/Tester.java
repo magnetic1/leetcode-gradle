@@ -1,4 +1,4 @@
-/**
+/*
  * Leetcode - delete_and_earn
  */
 package com.leetcode.delete_and_earn;
