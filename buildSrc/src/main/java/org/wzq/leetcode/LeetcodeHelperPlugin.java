@@ -1,11 +1,10 @@
 package org.wzq.leetcode;
 
 import com.ciaoshen.leetcode.helper.ProblemBuilder;
-import com.ciaoshen.leetcode.util.TreeNode;
 import org.gradle.api.Plugin;
 import org.gradle.api.Project;
-import org.gradle.api.Task;
 import org.gradle.api.artifacts.dsl.DependencyHandler;
+import org.wzq.leetcode.util.TreeNode;
 
 import java.io.File;
 import java.util.Scanner;
@@ -89,6 +88,8 @@ public class LeetcodeHelperPlugin implements Plugin<Project> {
     void addDependencies(Project project) {
         DependencyHandler dh = project.getDependencies();
 
+        String jarPath = ProblemBuilder.class.getProtectionDomain().getCodeSource().getLocation().getPath();
+        dh.add("implementation", project.files(jarPath));
 
         dh.add("implementation", "log4j:log4j:1.2.17");
         dh.add("implementation", "org.slf4j:slf4j-api:1.7.25");

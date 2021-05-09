@@ -12,7 +12,7 @@ public class Problem {
             "name='" + name + '\'' +
             ", pck='" + pck + '\'' +
             ", members='" + members + '\'' +
-            ", util='" + util + '\'' +
+            ", org.wzq.leetcode.util='" + util + '\'' +
             '}';
     }
 }

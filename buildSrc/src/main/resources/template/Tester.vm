@@ -3,7 +3,7 @@
  */
 package ${pck}.${problem};
 
-import java.util.*;
+import java.org.wzq.leetcode.util.*;
 import ${util}.*;
 
 import static org.junit.Assert.*;

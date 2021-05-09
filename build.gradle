@@ -17,7 +17,6 @@ dependencies {
 
 
 
-import com.ciaoshen.leetcode.util.TreeNode
 import jdk.nashorn.api.scripting.URLReader
 
 problem {

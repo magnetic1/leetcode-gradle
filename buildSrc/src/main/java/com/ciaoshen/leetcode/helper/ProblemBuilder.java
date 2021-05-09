@@ -49,7 +49,7 @@ import org.slf4j.LoggerFactory;
  *
  * @author Wei SHEN
  */
-public class ProblemBuilders {
+public class ProblemBuilder {
 
     /** ProblemBuilder knows only the name of the required properties files.
      * It doesn't know where to find them, but PropertyScanner knows. */
@@ -85,7 +85,7 @@ public class ProblemBuilders {
     VelocityEngine ve;
 
     /** collect parameters */
-    public ProblemBuilders(String[] args) {
+    public ProblemBuilder(String[] args) {
         if (args.length != 5) {
             throw new IllegalArgumentException("Must have 5 arguments!");
         }

@@ -3,8 +3,8 @@
  */
 package ${pck}.${problem};
 
-// basic util
-import java.util.*;
+// basic org.wzq.leetcode.util
+import java.org.wzq.leetcode.util.*;
 import ${util}.*;
 // leetcode-helper library
 import com.ciaoshen.leetcode.helper.PropertyScanner;
