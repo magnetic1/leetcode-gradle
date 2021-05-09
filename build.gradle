@@ -12,10 +12,12 @@ repositories {
 }
 
 dependencies {
-    implementation project(':LeetcodeUtils')
+//    implementation project(':LeetcodeUtils')
 }
 
 
+
+import com.ciaoshen.leetcode.util.TreeNode
 import jdk.nashorn.api.scripting.URLReader
 
 problem {
@@ -41,4 +43,9 @@ task generate {
 //
 //
 //    println(config.problem.name)
+} group "leetcode"
+
+
+test {
+    useJUnitPlatform()
 }

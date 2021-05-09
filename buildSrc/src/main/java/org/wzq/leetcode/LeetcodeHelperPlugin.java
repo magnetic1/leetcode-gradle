@@ -1,12 +1,14 @@
 package org.wzq.leetcode;
 
 import com.ciaoshen.leetcode.helper.ProblemBuilder;
+import com.ciaoshen.leetcode.util.TreeNode;
 import org.gradle.api.Plugin;
 import org.gradle.api.Project;
+import org.gradle.api.Task;
+import org.gradle.api.artifacts.dsl.DependencyHandler;
 
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.util.Properties;
+import java.io.File;
+import java.util.Scanner;
 
 
 public class LeetcodeHelperPlugin implements Plugin<Project> {
@@ -15,6 +17,8 @@ public class LeetcodeHelperPlugin implements Plugin<Project> {
 
     @Override
     public void apply(Project target) {
+        System.out.println(124);
+        System.out.println(TreeNode.class.getResource(""));
         target.task("sayHello", task -> {
             task.doLast(it ->
                 Fun.sayHello()
@@ -27,7 +31,11 @@ public class LeetcodeHelperPlugin implements Plugin<Project> {
             Problem problem = (Problem) target.getExtensions().getByName("problem");
             System.out.println(problem);
             System.out.println(target.getRootDir());
+
+            System.out.println(target.getLayout().getBuildDirectory().dir("classes"));
         });
+
+        addDependencies(target);
 
         target.task("create111", task -> {
             task.doLast(t -> {
@@ -37,19 +45,57 @@ public class LeetcodeHelperPlugin implements Plugin<Project> {
                     problem.pck, problem.util, problem.members
                 };
                 ProblemBuilder builder = new ProblemBuilder(args);
-                builder.writeTemplates();
+
+                String subPath = problem.pck.replace('.', '/');
+                File file = new File("src" + '/' + subPath + '/' + problem.name);
+                if (!file.exists()) {
+                    builder.writeTemplates();
+                } else {
+                    System.out.println("exits!");
+                }
+
             });
-        });
+        })
+        .setGroup(TASK_GROUP);
     }
 
-    Properties loadProblemProperties(Project project) {
-        Properties problemProperties = new Properties();
-        String path = project.absoluteProjectPath("problem.properties");
-        try {
-            problemProperties.load(new FileInputStream(path));
-        } catch (IOException e) {
-            e.printStackTrace();
+    void generate(Project project) {
+        Problem problem = (Problem) project.getExtensions().getByName("problem");
+        String[] args = new String[]{
+            project.getRootDir().toString(), problem.name,
+            problem.pck, problem.util, problem.members
+        };
+        ProblemBuilder builder = new ProblemBuilder(args);
+
+        String subPath = problem.pck.replace('.', '/');
+        File file = new File("src" + '/' + subPath + '/' + problem.name);
+        if (!file.exists()) {
+            builder.writeTemplates();
+        } else {
+            System.out.println("exits!");
+            Scanner sc = new Scanner(System.in);
+            while(true) {
+                String s = sc.nextLine();
+                if (s.equals("y")) {
+                    builder.writeTemplates();
+                    break;
+                } else if (s.equals("n")) {
+                    break;
+                }
+            }
         }
-        return problemProperties;
+    }
+
+    void addDependencies(Project project) {
+        DependencyHandler dh = project.getDependencies();
+
+
+        dh.add("implementation", "log4j:log4j:1.2.17");
+        dh.add("implementation", "org.slf4j:slf4j-api:1.7.25");
+        dh.add("implementation", "org.slf4j:slf4j-log4j12:1.7.25");
+        dh.add("implementation", "org.apache.commons:commons-lang3:3.3");
+
+        dh.add("testImplementation", "junit:junit:4.10");
+        dh.add("testImplementation", "org.hamcrest:java-hamcrest:2.0.0.0");
     }
 }

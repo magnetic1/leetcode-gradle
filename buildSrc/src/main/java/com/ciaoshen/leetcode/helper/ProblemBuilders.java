@@ -49,7 +49,7 @@ import org.slf4j.LoggerFactory;
  *
  * @author Wei SHEN
  */
-public class ProblemBuilder {
+public class ProblemBuilders {
 
     /** ProblemBuilder knows only the name of the required properties files.
      * It doesn't know where to find them, but PropertyScanner knows. */
@@ -73,7 +73,7 @@ public class ProblemBuilder {
     String members;         // args[4]: members of a class
 
     // project layout configuration extracted from layout.properties
-    String src;             // source directory (relative to project root)
+    public String src;             // source directory (relative to project root)
     String testSrc;         // junit test source directory (relative to project root)
 
     // absolute path constructed from the above relative path
@@ -85,7 +85,7 @@ public class ProblemBuilder {
     VelocityEngine ve;
 
     /** collect parameters */
-    public ProblemBuilder(String[] args) {
+    public ProblemBuilders(String[] args) {
         if (args.length != 5) {
             throw new IllegalArgumentException("Must have 5 arguments!");
         }
