@@ -5,7 +5,7 @@ package com.leetcode.delete_and_earn;
 
 // basic util
 import java.util.*;
-import com.wzq.leetcode.util.*;
+import com.ciaoshen.leetcode.util.*;
 // leetcode-helper library
 import com.ciaoshen.leetcode.helper.PropertyScanner;
 // junit 
@@ -25,23 +25,24 @@ import org.slf4j.LoggerFactory;
 public class TesterRunner {
 
     // use this Object to print the log (call from slf4j facade)
-    private static final Logger LOGGER = LoggerFactory.getLogger(TesterRunner.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(String.class);
     // both log4j and slf4j are included in leetcode-helper.jar
-    private static final String LOG4J = "log4j.properties";
+//    private static final String LOG4J = "log4j.properties";
 
     public static void main(String[] args) {
         // use log4j as Logger implementation
-        Properties log4jProps = PropertyScanner.load(LOG4J); // PropertyScanner load "log4j.properties" for us
-        PropertyConfigurator.configure(log4jProps);
-
-        // run Tester.class
-        Result result = JUnitCore.runClasses(Tester.class);
-        for (Failure failure : result.getFailures()) {
-            System.out.println(failure);
-        }
-        if (LOGGER.isDebugEnabled()) {
-            LOGGER.debug("Pass all JUnit test? {}", result.wasSuccessful());
-        }
+        System.out.println("");
+//        Properties log4jProps = PropertyScanner.load(LOG4J); // PropertyScanner load "log4j.properties" for us
+//        PropertyConfigurator.configure(log4jProps);
+//        LOGGER.info("tst");
+//        // run Tester.class
+//        Result result = JUnitCore.runClasses(Tester.class);
+//        for (Failure failure : result.getFailures()) {
+//            System.out.println(failure);
+//        }
+//        if (LOGGER.isDebugEnabled()) {
+//            LOGGER.debug("Pass all JUnit test? {}", result.wasSuccessful());
+//        }
     }
 
 }
