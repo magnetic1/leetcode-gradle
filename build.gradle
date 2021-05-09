@@ -1,5 +1,6 @@
 plugins {
     id 'java'
+    id 'application'
     id 'leetcode'
 }
 
@@ -30,12 +31,4 @@ task generate {
 //
 //
 //    println(config.problem.name)
-}
-
-import org.wzq.leetcode.Fun
-
-task hello {
-    doLast {
-        Fun.sayHello()
-    }
 }
