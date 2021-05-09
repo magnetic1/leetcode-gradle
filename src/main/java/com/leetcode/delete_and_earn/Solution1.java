@@ -1,9 +1,9 @@
 /**
- * Leetcode - ${problem}
+ * Leetcode - delete_and_earn
  */
-package ${pck}.${problem};
+package com.leetcode.delete_and_earn;
 import java.util.*;
-import ${util}.*;
+import org.wzq.leetcode.util.*;
 
 /** 
  * log instance is defined in Solution interface
@@ -14,8 +14,8 @@ import ${util}.*;
  *     }
  * =============================================
  */
-class Solution2 implements Solution {
+class Solution1 implements Solution {
 
-    ${members}
+    
 
 }

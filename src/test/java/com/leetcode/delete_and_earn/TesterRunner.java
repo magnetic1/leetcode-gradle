@@ -1,11 +1,11 @@
 /**
- * Leetcode - ${problem}
+ * Leetcode - delete_and_earn
  */
-package ${pck}.${problem};
+package com.leetcode.delete_and_earn;
 
 // basic org.wzq.leetcode.util
 import java.util.*;
-import ${util}.*;
+import org.wzq.leetcode.util.*;
 // leetcode-helper library
 import com.ciaoshen.leetcode.helper.PropertyScanner;
 // junit 

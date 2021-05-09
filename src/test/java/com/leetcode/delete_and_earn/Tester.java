@@ -1,10 +1,10 @@
 /**
- * Leetcode - ${problem}
+ * Leetcode - delete_and_earn
  */
-package ${pck}.${problem};
+package com.leetcode.delete_and_earn;
 
 import java.util.*;
-import ${util}.*;
+import org.wzq.leetcode.util.*;
 
 import static org.junit.Assert.*;
 import static org.hamcrest.CoreMatchers.*;

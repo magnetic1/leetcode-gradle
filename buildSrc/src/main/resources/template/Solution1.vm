@@ -2,7 +2,7 @@
  * Leetcode - ${problem}
  */
 package ${pck}.${problem};
-import java.org.wzq.leetcode.util.*;
+import java.util.*;
 import ${util}.*;
 
 /** 

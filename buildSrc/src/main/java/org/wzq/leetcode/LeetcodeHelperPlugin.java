@@ -46,7 +46,7 @@ public class LeetcodeHelperPlugin implements Plugin<Project> {
                 ProblemBuilder builder = new ProblemBuilder(args);
 
                 String subPath = problem.pck.replace('.', '/');
-                File file = new File("src" + '/' + subPath + '/' + problem.name);
+                File file = new File("src/main/java" + '/' + subPath + '/' + problem.name);
                 if (!file.exists()) {
                     builder.writeTemplates();
                 } else {
@@ -91,6 +91,7 @@ public class LeetcodeHelperPlugin implements Plugin<Project> {
         String jarPath = ProblemBuilder.class.getProtectionDomain().getCodeSource().getLocation().getPath();
         dh.add("implementation", project.files(jarPath));
 
+        dh.add("implementation", "org.apache.velocity:velocity-engine-core:2.0");
         dh.add("implementation", "log4j:log4j:1.2.17");
         dh.add("implementation", "org.slf4j:slf4j-api:1.7.25");
         dh.add("implementation", "org.slf4j:slf4j-log4j12:1.7.25");
