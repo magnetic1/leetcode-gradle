@@ -18,6 +18,16 @@ dependencies {
 
 import jdk.nashorn.api.scripting.URLReader
 
+problem {
+    Properties problemProperties = new Properties()
+    problemProperties.load(new FileInputStream("problem.properties"))
+
+    name = problemProperties.getProperty("problem.name")
+    pck = problemProperties.getProperty("problem.pck")
+    members = problemProperties.getProperty("problem.members")
+    util = problemProperties.getProperty("problem.util")
+}
+
 task generate {
     Properties problemProperties = new Properties()
     Properties layoutProperties = new Properties()
