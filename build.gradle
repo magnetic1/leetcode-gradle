@@ -21,6 +21,10 @@ problem {
     util = problemProperties.getProperty("problem.util")
 }
 
+//compileJava {
+//    options.compilerArgs << "-Xlint:unchecked"
+//}
+
 tasks.withType(JavaCompile) {
     options.encoding = "UTF-8"
 }

@@ -42,7 +42,6 @@ public class LeetcodeHelperPlugin implements Plugin<Project> {
         Scanner sc = new Scanner(System.in);
         target.task("create").doLast(task -> {
             System.out.println("start create:");
-            System.out.flush();
             generate(target, sc);
         }).setGroup(TASK_GROUP);
     }
