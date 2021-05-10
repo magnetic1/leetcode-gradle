@@ -11,14 +11,6 @@ repositories {
     mavenCentral()
 }
 
-dependencies {
-//    implementation project(':LeetcodeUtils')
-}
-
-
-
-import jdk.nashorn.api.scripting.URLReader
-
 problem {
     Properties problemProperties = new Properties()
     problemProperties.load(new FileInputStream("problem.properties"))
@@ -27,24 +19,4 @@ problem {
     pck = problemProperties.getProperty("problem.pck")
     members = problemProperties.getProperty("problem.members")
     util = problemProperties.getProperty("problem.util")
-}
-
-task generate {
-    Properties problemProperties = new Properties()
-    Properties layoutProperties = new Properties()
-
-    String jar = "leetcode-helper.jar"
-//    layoutProperties.load(new URLReader(new URL("jar:file:lib/${jar}!/conf/layout.properties"), "utf-8"))
-    problemProperties.load(new FileInputStream("problem.properties"))
-
-    println problemProperties.getProperty("problem.name")
-//    def config = new ConfigSlurper().parse(properties)
-//
-//
-//    println(config.problem.name)
-} group "leetcode"
-
-
-test {
-    useJUnitPlatform()
 }

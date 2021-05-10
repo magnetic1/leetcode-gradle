@@ -4,9 +4,11 @@ import com.ciaoshen.leetcode.helper.ProblemBuilder;
 import org.gradle.api.Plugin;
 import org.gradle.api.Project;
 import org.gradle.api.artifacts.dsl.DependencyHandler;
-import org.wzq.leetcode.util.TreeNode;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.util.Properties;
 import java.util.Scanner;
 
 
@@ -16,8 +18,6 @@ public class LeetcodeHelperPlugin implements Plugin<Project> {
 
     @Override
     public void apply(Project target) {
-        System.out.println(124);
-        System.out.println(TreeNode.class.getResource(""));
         target.task("sayHello", task -> {
             task.doLast(it ->
                 Fun.sayHello()
@@ -26,17 +26,19 @@ public class LeetcodeHelperPlugin implements Plugin<Project> {
 
         target.getExtensions().create("problem", Problem.class);
 
+        target.getExtensions().configure("problem", object -> {
+            Problem problem = (Problem) object;
+            problemLoad(problem);
+        });
+
         target.afterEvaluate(t -> {
             Problem problem = (Problem) target.getExtensions().getByName("problem");
             System.out.println(problem);
-            System.out.println(target.getRootDir());
-
-            System.out.println(target.getLayout().getBuildDirectory().dir("classes"));
         });
 
         addDependencies(target);
 
-        target.task("create111", task -> {
+        target.task("create", task -> {
             task.doLast(t -> {
                 Problem problem = (Problem) target.getExtensions().getByName("problem");
                 String[] args = new String[]{
@@ -56,6 +58,20 @@ public class LeetcodeHelperPlugin implements Plugin<Project> {
             });
         })
         .setGroup(TASK_GROUP);
+    }
+
+    private void problemLoad(Problem problem) {
+        Properties problemProperties = new Properties();
+        try {
+            problemProperties.load(new FileInputStream("problem.properties"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        problem.name = problemProperties.getProperty("problem.name");
+        problem.pck = problemProperties.getProperty("problem.pck");
+        problem.members = problemProperties.getProperty("problem.members");
+        problem.util = problemProperties.getProperty("problem.util");
     }
 
     void generate(Project project) {
