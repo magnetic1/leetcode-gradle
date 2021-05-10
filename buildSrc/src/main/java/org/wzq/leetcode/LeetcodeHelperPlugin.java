@@ -1,13 +1,17 @@
 package org.wzq.leetcode;
 
 import com.ciaoshen.leetcode.helper.ProblemBuilder;
+import groovy.lang.Closure;
 import org.gradle.api.Plugin;
 import org.gradle.api.Project;
 import org.gradle.api.artifacts.dsl.DependencyHandler;
+import org.gradle.api.tasks.JavaExec;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Properties;
 import java.util.Scanner;
 
@@ -18,17 +22,14 @@ public class LeetcodeHelperPlugin implements Plugin<Project> {
 
     @Override
     public void apply(Project target) {
-        target.task("sayHello", task -> {
-            task.doLast(it ->
-                Fun.sayHello()
-            );
-        }).setGroup(TASK_GROUP);
+        target.task("sayHello").doLast(it ->
+                System.out.println("Hello leetcode!")
+        ).setGroup(TASK_GROUP);
 
         target.getExtensions().create("problem", Problem.class);
 
-        target.getExtensions().configure("problem", object -> {
-            Problem problem = (Problem) object;
-            problemLoad(problem);
+        target.getExtensions().configure("problem", problem -> {
+            problemLoad((Problem) problem);
         });
 
         target.afterEvaluate(t -> {
@@ -38,25 +39,43 @@ public class LeetcodeHelperPlugin implements Plugin<Project> {
 
         addDependencies(target);
 
-        target.task("create", task -> {
-            task.doLast(t -> {
-                Problem problem = (Problem) target.getExtensions().getByName("problem");
-                String[] args = new String[]{
-                    target.getRootDir().toString(), problem.name,
-                    problem.pck, problem.util, problem.members
-                };
-                ProblemBuilder builder = new ProblemBuilder(args);
+        Scanner sc = new Scanner(System.in);
+        target.task("create").doLast(task -> {
+            System.out.println("start create:");
+            System.out.flush();
+            generate(target, sc);
+        }).setGroup(TASK_GROUP);
+    }
 
-                String subPath = problem.pck.replace('.', '/');
-                File file = new File("src/main/java" + '/' + subPath + '/' + problem.name);
-                if (!file.exists()) {
-                    builder.writeTemplates();
-                } else {
-                    System.out.println("exits!");
-                }
-            });
-        })
-        .setGroup(TASK_GROUP);
+    private void generate(Project target, Scanner sc) {
+        Problem problem = (Problem) target.getExtensions().getByName("problem");
+        String[] args = new String[]{
+                target.getRootDir().toString(), problem.name,
+                problem.pck, problem.util, problem.members
+        };
+        ProblemBuilder builder = new ProblemBuilder(args);
+
+        String subPath = problem.pck.replace('.', '/');
+        File file = new File("src/main/java" + '/' + subPath + '/' + problem.name);
+        if (!file.exists() || replace(sc, problem.name)) {
+            builder.writeTemplates();
+            System.out.println("GENERATE SUCCEED");
+        } else {
+            System.out.println("GENERATE FAILED");
+        }
+    }
+
+    private boolean replace(Scanner sc, String name) {
+        System.out.print("Old " + name + " already exits. Do you want to replace it ? (y/n):");
+        System.out.flush();
+        String ans = sc.nextLine();
+        if (ans.equals("y")) {
+            return true;
+        } else if (ans.equals("n")) {
+            return false;
+        } else {
+            return replace(sc, name);
+        }
     }
 
     private void problemLoad(Problem problem) {
@@ -73,34 +92,8 @@ public class LeetcodeHelperPlugin implements Plugin<Project> {
         problem.util = problemProperties.getProperty("problem.util");
     }
 
-    void generate(Project project) {
-        Problem problem = (Problem) project.getExtensions().getByName("problem");
-        String[] args = new String[]{
-            project.getRootDir().toString(), problem.name,
-            problem.pck, problem.util, problem.members
-        };
-        ProblemBuilder builder = new ProblemBuilder(args);
 
-        String subPath = problem.pck.replace('.', '/');
-        File file = new File("src" + '/' + subPath + '/' + problem.name);
-        if (!file.exists()) {
-            builder.writeTemplates();
-        } else {
-            System.out.println("exits!");
-            Scanner sc = new Scanner(System.in);
-            while(true) {
-                String s = sc.nextLine();
-                if (s.equals("y")) {
-                    builder.writeTemplates();
-                    break;
-                } else if (s.equals("n")) {
-                    break;
-                }
-            }
-        }
-    }
-
-    void addDependencies(Project project) {
+    private void addDependencies(Project project) {
         DependencyHandler dh = project.getDependencies();
 
         String jarPath = ProblemBuilder.class.getProtectionDomain().getCodeSource().getLocation().getPath();
