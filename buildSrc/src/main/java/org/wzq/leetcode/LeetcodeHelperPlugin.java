@@ -54,7 +54,6 @@ public class LeetcodeHelperPlugin implements Plugin<Project> {
                 } else {
                     System.out.println("exits!");
                 }
-
             });
         })
         .setGroup(TASK_GROUP);
