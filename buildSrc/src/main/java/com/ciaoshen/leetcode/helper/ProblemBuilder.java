@@ -93,7 +93,7 @@ public class ProblemBuilder {
         root = args[0];             // such as: /Users/Wei/github/leetcode-helper
         problemName = args[1];      // such as: two_sum
         pck = args[2];              // such as: com.ciaoshen.leetcode
-        util = args[3];             // such as: com.ciaoshen.leetcode.util
+        util = args[3];             // such as: org.wzq.leetcode.util
         members = args[4];          // such as: int add(int a, int b) {}
         if (LOGGER.isDebugEnabled()) {
             for (int i = 0; i < args.length; i++) {

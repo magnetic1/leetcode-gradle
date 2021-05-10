@@ -20,3 +20,7 @@ problem {
     members = problemProperties.getProperty("problem.members")
     util = problemProperties.getProperty("problem.util")
 }
+
+tasks.withType(JavaCompile) {
+    options.encoding = "UTF-8"
+}
