@@ -11,6 +11,9 @@ repositories {
     mavenCentral()
 }
 
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
 problem {
     Properties problemProperties = new Properties()
     problemProperties.load(new FileInputStream("problem.properties"))
