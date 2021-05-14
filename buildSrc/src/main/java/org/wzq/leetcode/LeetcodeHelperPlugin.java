@@ -58,14 +58,14 @@ public class LeetcodeHelperPlugin implements Plugin<Project> {
         File file = new File("src/main/java" + '/' + subPath + '/' + problem.name);
         if (!file.exists() || replace(sc, problem.name)) {
             builder.writeTemplates();
-            System.out.println("GENERATE SUCCEED");
+            System.out.println("\nGENERATE SUCCEED");
         } else {
-            System.out.println("GENERATE FAILED");
+            System.out.println("\nGENERATE FAILED");
         }
     }
 
     private boolean replace(Scanner sc, String name) {
-        System.out.print("Old " + name + " already exits. Do you want to replace it ? (y/n):");
+        System.out.print("\nOld " + name + " already exits. Do you want to replace it ? (y/n):");
         System.out.flush();
         String ans = sc.nextLine();
         if (ans.equals("y")) {
