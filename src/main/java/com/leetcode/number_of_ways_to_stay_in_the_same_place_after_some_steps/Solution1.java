@@ -22,7 +22,7 @@ class Solution1 implements Solution {
         int[] dp = new int[maxColumn + 1];
         dp[0] = 1;
 
-        int cache = 0, tmp = 0;
+        int cache, tmp;
         for (int i = 1; i <= steps; i++) {
             cache = dp[0];
             dp[0] = (dp[0] + dp[1]) % mod;
