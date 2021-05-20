@@ -31,7 +31,7 @@ class Solution1 implements Solution {
             if (heap.size() > k) heap.poll();
         }
 
-        List<String> ans = new ArrayList();
+        List<String> ans = new ArrayList<>();
         while (!heap.isEmpty()) ans.add(heap.poll());
         Collections.reverse(ans);
         return ans;
