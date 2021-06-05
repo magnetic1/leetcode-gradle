@@ -8,6 +8,11 @@ public class ListNode {
         this.val = x;
     }
 
+    public ListNode(int x, ListNode next) {
+        this.val = x;
+        this.next = next;
+    }
+
     public String toString() {
         ListNode cursor = this;
         StringBuilder sb = new StringBuilder();
