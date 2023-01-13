@@ -1,17 +1,13 @@
 package org.wzq.leetcode;
 
 import com.ciaoshen.leetcode.helper.ProblemBuilder;
-import groovy.lang.Closure;
 import org.gradle.api.Plugin;
 import org.gradle.api.Project;
 import org.gradle.api.artifacts.dsl.DependencyHandler;
-import org.gradle.api.tasks.JavaExec;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Properties;
 import java.util.Scanner;
 
@@ -29,10 +25,13 @@ public class LeetcodeHelperPlugin implements Plugin<Project> {
         target.getExtensions().create("problem", Problem.class);
 
         target.getExtensions().configure("problem", problem -> {
+            System.out.println("===configure===");
             problemLoad((Problem) problem);
+            System.out.println(problem);
         });
 
         target.afterEvaluate(t -> {
+            System.out.println("===afterEvaluate===");
             Problem problem = (Problem) target.getExtensions().getByName("problem");
             System.out.println(problem);
         });
